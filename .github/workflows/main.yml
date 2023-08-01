@@ -1,17 +1,12 @@
-name: Deploy to Dev Ec2 instance
-
-on:
-  push:
-    branches:
-      - main
-
+name: Example workflow for Maven using Snyk
+on: push
 jobs:
   security:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
+        uses: snyk/actions/maven-3-jdk-11@master
         continue-on-error: true # To make sure that SARIF upload gets called
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
